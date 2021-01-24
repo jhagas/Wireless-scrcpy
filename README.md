@@ -5,7 +5,9 @@ Tested on linux
 ## Installation
 For installation (User install), just copy this into your terminal
 ```bash
-git clone https://github.com/jhagas/wireless-scrcpy.git ~/.local/bin/
+git clone https://github.com/jhagas/wireless-scrcpy.git
+cd ~/wireless-scrcpy
+cp wireless-scrcpy ~/.local/bin/
 ```
 
 Scrcpy project by Genymobile : https://github.com/Genymobile/scrcpy
