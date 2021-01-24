@@ -1,0 +1,32 @@
+#!/bin/sh
+# Is adb installed?
+[ ! $(which adb) ] && echo "Please install adb!" && exit 1
+
+# Is scrcpy installed?
+[ ! $(which scrcpy) ] && echo "Please install scrcpy!" && exit 1
+
+# Kill ADB if it's already running
+killall adb
+
+# Show some Indonesian guide for this script
+echo Pastikan HP android anda sudah tersambung dengan kabel data
+echo dan laptop tersambung ke jaringan WiFi yang sama
+echo
+sleep 1
+
+# Main Part, take the android local IP address and connect it to TCP/IP ADB
+adb tcpip 5555
+sleep 1
+adb shell ip route | awk '{print $9}' | sed -n '1p' | xargs -I{} adb connect {}:5555
+
+# Message to unplug your android phone
+echo
+echo "Cepat lepas kabel data dari ponsel anda, waktu anda 2 detik!"
+sleep 3
+echo
+
+# Open scrcpy
+scrcpy -b2M -m800
+
+# Closing message
+echo "Great! Have a nice day"
