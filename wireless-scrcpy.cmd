@@ -1,12 +1,12 @@
 @echo off
 
-:: Mematikan ADB server jika masih berjalan
+:: Kill ADB if it's already running
 adb kill-server
 
-:: Pesan pop-up panduan kepada pengguna
-msg * /self /w "Pastikan HP android anda sudah tersambung dengan kabel data dan laptop tersambung ke jaringan WiFi yang sama"
+:: Pop-up message to user
+msg * /self /w "FOR SECURITY REASON, DON'T USE THIS SCRIPT ON PUBLIC WIFI!! Make sure both of your android phone and your computer is connected to the same discoverable WiFi Network, click OK to continue"
 
-:: Bagian utama
+:: Main Part
 adb tcpip 5555
 timeout 1 /nobreak
 
@@ -18,8 +18,8 @@ for /f "tokens=9" %%i in ('adb shell ip route') do (
 :endfor
 endlocal
 
-:: Pesan untuk mencabut ponsel android dari komputer
-msg * /self /w "Silahkan lepas kabel data dari ponsel android anda"
+:: A message to unplug the phone
+msg * /self /w "Please unplug your Android Phone, click OK to continue"
 
 :: scrcpy
 scrcpy -b2M -m800
