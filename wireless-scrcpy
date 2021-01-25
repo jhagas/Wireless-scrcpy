@@ -17,11 +17,10 @@ killall adb
 echo Make sure both of your android phone and your computer
 echo is connected to the same discoverable WiFi Network
 echo "---"
-sleep 1
 
 # Main Part, take the android local IP address and connect it to TCP/IP ADB
 adb tcpip 5555
-sleep 1
+sleep 2
 adb shell ip route | awk '{print $9}' | sed -n '1p' | xargs -I{} adb connect {}:5555
 
 # Message to unplug your android phone
