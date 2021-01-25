@@ -8,9 +8,9 @@ It uses an ADB over TCP/IP protocol, so make sure both of your phone and your la
 ## :penguin: Linux Installation (User install)
 1. For installation, just copy these commands into your terminal and press ENTER
 ```bash
-git clone https://github.com/jhagas/wireless-scrcpy.git
-cd ~/wireless-scrcpy
-cp wireless-scrcpy ~/.local/bin/
+git clone https://github.com/jhagas/wireless-scrcpy
+cp ~/wireless-scrcpy/wireless-scrcpy ~/.local/bin/
+rm -rf ~/wireless-scrcpy
 ```
 2. Then run the command by type these in terminal and hit ENTER
 ```bash
