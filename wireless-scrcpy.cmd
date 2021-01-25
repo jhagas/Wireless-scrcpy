@@ -8,7 +8,7 @@ msg * /self /w "FOR SECURITY REASON, DON'T USE THIS SCRIPT ON PUBLIC WIFI!! Make
 
 :: Main Part
 adb tcpip 5555
-timeout 1 /nobreak
+timeout 2 /nobreak
 
 setlocal enableextensions enabledelayedexpansion
 for /f "tokens=9" %%i in ('adb shell ip route') do (
