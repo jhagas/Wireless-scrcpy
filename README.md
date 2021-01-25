@@ -1,8 +1,8 @@
 # Wireless-scrcpy
-Scrcpy, but with a wireless shell script, so you can easily connect to your android device WIRELESSLY without remembering long commands. Tested on Linux and Windows 10 (cmd). Mainly, the CLI guide is in Indonesia. If you want to contribute something, please translate it into English
+Scrcpy, but with a wireless shell script, so you can easily connect to your android device WIRELESSLY without remembering long commands. Tested on Linux and Windows 10 (cmd). Mainly, the in-script guide is in Indonesia. If you want to contribute something, please consider translate it into English
 
 ## IMPORTANT!
-It uses an ADB over TCP/IP protocol, so make sure you have the discoverable wifi network. And for security reason, PLEASE DO NOT USE THIS IN THE PUBLIC WIFI!!
+It uses an ADB over TCP/IP protocol, so make sure both of your phone and your laptop connected to the discoverable wifi network. And for security reason, by all means PLEASE DO NOT USE THIS IN THE PUBLIC WIFI!!
 
 ## :penguin: Linux Installation (User install)
 1. For installation, just copy these commands into your terminal and press ENTER
