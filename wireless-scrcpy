@@ -25,6 +25,7 @@ sleep 1
 adb shell ip route | awk '{print $9}' | sed -n '1p' | xargs -I{} adb connect {}:5555
 
 # Message to unplug your android phone
+sleep 2
 whiptail --msgbox "Unplug your Android Phone, Press ENTER to continue!" 10 40
 echo "---"
 
