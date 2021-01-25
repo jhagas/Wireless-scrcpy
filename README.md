@@ -3,7 +3,7 @@ Scrcpy, but with a easy-to-run wireless script, so you can easily connect to you
 If you want to contribute something, please consider translate it into English
 
 ## IMPORTANT!
-It uses an ADB over TCP/IP protocol, so make sure both of your phone and your laptop connected to the discoverable wifi network. And for security reason, by all means PLEASE DO NOT USE THIS IN THE PUBLIC WIFI!!
+It uses an ADB over TCP/IP protocol, so make sure both of your phone and your laptop connected to the SAME discoverable wifi network. And for security reason, by all means DO NOT USE THIS SCRIPT IN THE PUBLIC WIFI NETWORK!!
 
 ## :penguin: Linux Installation (User install)
 1. For installation, just copy these commands into your terminal and press ENTER
