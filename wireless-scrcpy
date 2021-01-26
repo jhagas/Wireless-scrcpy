@@ -13,7 +13,7 @@ whiptail --msgbox "FOR SECURITY REASON, DON'T USE THIS SCRIPT ON PUBLIC WIFI!! P
 # Kill ADB if it's already running
 killall adb
 
-# Show some Indonesian guide for this script
+# Show some guide message for this script
 echo Make sure both of your android phone and your computer
 echo is connected to the same discoverable WiFi Network
 echo "---"
