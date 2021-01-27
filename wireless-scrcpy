@@ -1,10 +1,8 @@
 #!/bin/sh
 # Is adb installed?
 [ ! $(which adb) ] && echo "Please install adb!" && exit 1
-
 # Is scrcpy installed?
 [ ! $(which scrcpy) ] && echo "Please install scrcpy!" && exit 1
-
 # Is whiptail installed?
 [ ! $(which whiptail) ] && echo "Please install whiptail!" && exit 1
 
@@ -13,24 +11,26 @@ whiptail --msgbox "FOR SECURITY REASON, DON'T USE THIS SCRIPT ON PUBLIC WIFI!! P
 # Kill ADB if it's already running
 killall adb
 
-# Show some guide message for this script
-echo Make sure both of your android phone and your computer
-echo is connected to the same discoverable WiFi Network
+# Show some guide for this script
+echo "Make sure both of your android phone and your computer"
+echo "is connected to the same discoverable WiFi Network"
 echo "---"
 
 # Main Part, take the android local IP address and connect it to TCP/IP ADB
-adb tcpip 5555
+echo "Connecting..."
+adb tcpip 5555 >/dev/null 2>&1
 sleep 2
-adb shell ip route | awk '{print $9}' | sed -n '1p' | xargs -I{} adb connect {}:5555
+if [ $(adb shell ip route | awk '{print $9}' | sed -n '1p' | xargs -I{} adb connect {}:5555) "error" ] >/dev/null 2>&1; then
+     echo "FAILED TO CONNECT! Plug your phone and try again!" && exit 1
+else
+     echo "Connection Established!"
+fi
 
 # Message to unplug your android phone
 sleep 2
 whiptail --msgbox "Unplug your Android Phone, Press ENTER to continue!" 10 40
-echo "---"
 
 # Open scrcpy
-scrcpy -b2M -m800
-
-# Closing message
-echo "---"
-echo "Great! Have a nice day"
+if [ $(scrcpy $1 $2 $3 $4 $5 | awk '{print $1}' | sed -n '2p') "ERROR:" ]; then
+echo "--- \nYour laptop and your phone are not in the same network \nor the network seems to be undiscoverable" && exit 1
+fi
