@@ -20,7 +20,7 @@ echo "---"
 echo "Connecting..."
 adb tcpip 5555 >/dev/null 2>&1
 sleep 2
-if [ $(adb shell ip route | awk '{print $9}' | sed -n '1p' | xargs -I{} adb connect {}:5555) "error" ] >/dev/null 2>&1; then
+if [ $(adb shell ip route | awk '{print $9}' | sed -n '2p' | xargs -I{} adb connect {}:5555) "error" ] >/dev/null 2>&1; then
      echo "FAILED TO CONNECT! Plug your phone and try again!" && exit 1
 else
      echo "Connection Established!"
