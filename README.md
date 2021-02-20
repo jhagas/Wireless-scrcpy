@@ -7,16 +7,17 @@ It uses an ADB over TCP/IP protocol, so make sure both of your phone and your la
 ## :penguin: Linux Installation (User install)
 For installation, just copy these commands into your terminal and press ENTER
 ```bash
-git clone https://github.com/jhagas/wireless-scrcpy
-mkdir ~/.local/bin/
-chmod 777 ~/wireless-scrcpy/wireless-scrcpy
-cp ~/wireless-scrcpy/wireless-scrcpy ~/.local/bin/
-rm -rf ~/wireless-scrcpy
+sudo curl -sL https://github.com/jhagas/Wireless-scrcpy/raw/main/wireless-scrcpy -o /usr/local/bin/wireless-scrcpy
+sudo chmod +x /usr/local/bin/wireless-scrcpy
 ```
-Then run the wireless-scrcpy command by type these in terminal and hit ENTER
+----
+**The usage of wireless-scrcpy**
 ```bash
-wireless-scrcpy
+wireless-scrcpy <OPTION>
 ```
+Option:
+- ```-q```      Quiet Mode, Connect ADB TCPIP and open scrcpy later
+
 ## Microsoft Windows Installation (Zip Download)
 I assume you download scrcpy from the zip file provided in the original project, so
 1. Download wireless-scrcpy.cmd from this project directory.
