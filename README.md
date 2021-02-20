@@ -31,8 +31,6 @@ I assume you download scrcpy from the zip file provided in the original project,
 3. Double-click wireless-scrcpy.cmd to run it!
 4. For simplicity, you can also make a shortcut of it
 
-## Issues
-For some reason, ADB TCP/IP pairing didn't work. To fix it, please unplug then plug your android device again and try to run the script.
 
 ## Give Star to the original project!
 Scrcpy project by Genymobile : https://github.com/Genymobile/scrcpy
