@@ -1,36 +1,81 @@
-#!/bin/sh
-# Is adb installed?
+#!/bin/bash
+
+# Ascii color code variables
+red="\e[0;91m"
+green="\e[0;92m"
+bold="\e[1m"
+reset="\e[0m"
+
+
+# Dependency Check
 [ ! $(which adb) ] && echo "Please install adb!" && exit 1
-# Is scrcpy installed?
 [ ! $(which scrcpy) ] && echo "Please install scrcpy!" && exit 1
-# Is whiptail installed?
 [ ! $(which whiptail) ] && echo "Please install whiptail!" && exit 1
 
-whiptail --msgbox "FOR SECURITY REASON, DON'T USE THIS SCRIPT ON PUBLIC WIFI!! Press ENTER to continue" 10 50
+
+# Argument Parsing
+secure="FOR SECURITY REASON, DON'T USE THIS SCRIPT ON PUBLIC WIFI unless you know what you're doing!!"
+fail="FAILED TO CONNECT! Your laptop and your phone are not in the same discoverable network"
+usbfail="FAILED TO CONNECT! Plug in your phone"
+scrcpyfail="FAIL! You don't unplug your phone"
+
+ip() {
+     adb shell ip route | awk '{print $9}' | sed -n '2p' | xargs -I{} adb connect {}:5555
+}
+
+ufail() {
+     echo -e "${red}${bold}${usbfail}${reset}" && exit
+}
+
+wifail() {
+     echo -e "${red}${bold}${fail}${reset}" && exit
+}
+
+port() {
+     adb tcpip 5555 >/dev/null 2>&1
+}
+
+
+# Only Connect (quiet) Mode
+case $1 in
+     -q)
+          quiet=true
+          ;;
+     *)
+          quiet=false
+          ;;
+esac
+
+
+# Security Confirmation
+whiptail --yesno "${secure}" 10 50
+[ $? = 1 ] && exit
+
 
 # Kill ADB if it's already running
-killall adb
+killall adb >/dev/null 2>&1
 
-# Show some guide for this script
-echo "Make sure both of your android phone and your computer"
-echo "is connected to the same discoverable WiFi Network"
-echo "---"
 
 # Main Part, take the android local IP address and connect it to TCP/IP ADB
-echo "Connecting..."
-adb tcpip 5555 >/dev/null 2>&1
+echo "Starting ADB Connection.."
+
+port || ufail
 sleep 2
-if [ $(adb shell ip route | awk '{print $9}' | sed -n '2p' | xargs -I{} adb connect {}:5555) "error" ] >/dev/null 2>&1; then
-     echo "FAILED TO CONNECT! Plug your phone and try again!" && exit 1
-else
-     echo "Connection Established!"
-fi
+
+[[ ! $(ip) ]] && wifail
+echo -e "${green}${bold}ADB Connection Established!${reset}"
+
 
 # Message to unplug your android phone
 sleep 2
-whiptail --msgbox "Unplug your Android Phone, Press ENTER to continue!" 10 40
+
 
 # Open scrcpy
-if [ $(scrcpy $1 $2 $3 $4 $5 | awk '{print $1}' | sed -n '2p') "ERROR:" ]; then
-echo "--- \nYour laptop and your phone are not in the same network \nor the network seems to be undiscoverable" && exit 1
+if [ $quiet = "false" ]
+     then
+          whiptail --msgbox "Unplug your Android Phone, Press ENTER to continue!" 10 40
+          echo -e "${bold}Opening scrcpy..${reset}"
+          scrcpy -b2M -m800 >/dev/null 2>&1 || echo -e "${red}${bold}${scrcpyfail}${reset}"
+     else
+          echo -e "${bold}Unplug your phone, and you can open scrcpy anytime..${reset}"
 fi
