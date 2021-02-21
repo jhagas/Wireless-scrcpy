@@ -38,7 +38,7 @@ port() {
 
 # Only Connect (quiet) Mode
 case $1 in
-     -q)
+     -q|--quiet)
           quiet=true
           ;;
      *)
