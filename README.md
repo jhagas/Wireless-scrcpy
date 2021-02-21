@@ -4,7 +4,7 @@ Scrcpy, but with a easy-to-run wireless script, so you can easily connect to you
 ## IMPORTANT!
 It uses an ADB over TCP/IP protocol, so make sure both of your phone and your laptop connected to the SAME discoverable wifi network. And for security reason, by all means DO NOT USE THIS SCRIPT IN THE PUBLIC WIFI NETWORK!!
 
-## :penguin: Linux Installation (User install)
+## :penguin: Linux Installation
 For installation, just copy these commands into your terminal and press ENTER
 ```bash
 sudo curl -sL https://github.com/jhagas/Wireless-scrcpy/raw/main/wireless-scrcpy -o /usr/local/bin/wireless-scrcpy
@@ -16,7 +16,7 @@ sudo chmod +x /usr/local/bin/wireless-scrcpy
 wireless-scrcpy <OPTION>
 ```
 Option:
-- ```-q```      Quiet Mode, Connect ADB TCPIP and open scrcpy later
+- ```-q``` or ```--quiet```     Quiet Mode, Connect ADB TCPIP and open scrcpy later
 
 ## Microsoft Windows Installation (Zip Download)
 I assume you download scrcpy from the zip file provided in the original project, so
